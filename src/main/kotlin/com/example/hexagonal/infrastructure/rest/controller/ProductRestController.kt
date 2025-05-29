@@ -14,7 +14,9 @@ class ProductRestController(private val productInteractor: IProductInteractor) {
 
     @GetMapping("/{productId}")
     fun findProductByProductId(@PathVariable productId: String): ProductDto? {
-        return productInteractor.findProductById(productId)?.let { product ->  ProductDtoMapper.fromProductToDto(product)}
+        return productInteractor.findProductById(productId)?.let {
+            product ->  ProductDtoMapper.fromProductToDto(product)
+        }
     }
     
 }
