@@ -5,6 +5,7 @@ import com.example.hexagonal.domain.port.ProductRepositoryPort
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNotNull
 import org.mockito.Mockito.*
+import org.springframework.kafka.core.KafkaTemplate
 import java.math.BigDecimal
 import kotlin.test.assertEquals
 
@@ -16,7 +17,8 @@ private const val CURRENCY = "currency"
 class ProductInteractorTest {
 	
 	private val productRepository: ProductRepositoryPort = mock()
-	private val productInteractor = ProductInteractor(productRepository)
+	private val kafkaTemplate: KafkaTemplate<String, String> = mock()
+	private val productInteractor = ProductInteractor(productRepository, kafkaTemplate)
 	
 	@Test
 	fun findProductById() {
