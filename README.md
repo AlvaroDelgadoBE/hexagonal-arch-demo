@@ -8,9 +8,10 @@ patrones de diseño, arquitecturas y testing.
 - Kotlin 2.0.21
 - Gradle
 - Spring Data JPA
+- Apache Kafka (consumer y producer)
+- Spring boot
 - Arquitectura hexagonal
 - Patrón de diseño singleton
-- Spring boot
 - Test unitarios (mockito)
 - Base de datos SQL (h2)
 
