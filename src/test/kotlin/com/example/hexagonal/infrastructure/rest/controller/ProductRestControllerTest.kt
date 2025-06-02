@@ -3,6 +3,7 @@ package com.example.hexagonal.infrastructure.rest.controller
 import com.example.hexagonal.infrastructure.database.h2.entity.ProductEntity
 import com.example.hexagonal.infrastructure.database.h2.mapper.ProductEntityMapper
 import com.example.hexagonal.usecase.IProductInteractor
+import com.example.hexagonal.usecase.IReviewInteractor
 import org.mockito.Mockito.*
 import java.math.BigDecimal
 import java.util.*
@@ -13,7 +14,8 @@ import kotlin.test.assertNotNull
 class ProductRestControllerTest {
 	
 	private val productInteractor: IProductInteractor = mock()
-	private val productRestController = ProductRestController(productInteractor)
+	private val reviewInteractor: IReviewInteractor = mock()
+	private val productRestController = ProductRestController(productInteractor, reviewInteractor)
 	
 	@Test
 	fun findProductByProductIdShouldReturnProductDtoIfExists() {

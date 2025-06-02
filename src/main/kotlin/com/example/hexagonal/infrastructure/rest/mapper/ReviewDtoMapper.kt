@@ -11,4 +11,11 @@ object ReviewDtoMapper {
 			review.review
 		)
 	}
+	
+	fun fromDtoToReview(reviewDto: ReviewDto): Review {
+		return Review(
+			reviewDto.productId,
+			reviewDto.review
+		)
+	}
 }

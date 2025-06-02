@@ -1,4 +1,4 @@
-package com.example.hexagonal.kafka.config
+package com.example.hexagonal.infrastructure.kafka.config
 
 import org.apache.kafka.clients.admin.NewTopic
 import org.apache.kafka.common.config.TopicConfig
@@ -11,12 +11,12 @@ class KafkaConfig {
 	
 	companion object {
 		
-		const val PRODUCT_TOPIC = "productTopic"
+		const val REVIEW_TOPIC = "reviewTopic"
 		
 	}
 	
 	@Bean
-	fun createProductTopic(): NewTopic {
+	fun createReviewTopic(): NewTopic {
 		val configs = HashMap<String, String>()
 		configs.put(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_DELETE)
 		configs.put(TopicConfig.RETENTION_MS_CONFIG, "86400000")
@@ -24,7 +24,7 @@ class KafkaConfig {
 		configs.put(TopicConfig.MAX_MESSAGE_BYTES_CONFIG, "1000012")
 		
 		return TopicBuilder
-			.name(PRODUCT_TOPIC)
+			.name(REVIEW_TOPIC)
 			.partitions(1)
 			.replicas(1)
 			.configs(configs)

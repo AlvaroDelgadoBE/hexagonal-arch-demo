@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS reviews;
 
 -- Create the product table
 CREATE TABLE products (
@@ -7,10 +8,18 @@ CREATE TABLE products (
                          name VARCHAR(100),
                          description TEXT,
                          price DOUBLE PRECISION,
-                         currency VARCHAR(1)
+                         currency VARCHAR(1),
+                         UNIQUE (product_id)
 );
 
 CREATE INDEX idx_productId ON products (product_id);
+
+CREATE TABLE reviews (
+                         id UUID PRIMARY KEY,
+                         product_id VARCHAR(50),
+                         review VARCHAR(200),
+                         FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
 
 -- Insert initial data into the product table
 INSERT INTO products (id, product_id, name, description, price, currency) VALUES

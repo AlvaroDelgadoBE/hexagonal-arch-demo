@@ -1,6 +1,9 @@
 package com.example.hexagonal.infrastructure.rest.dto
 
-data class ReviewDto(
-	var productId: String,
-	var review: String
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
+
+data class ReviewDto @JsonCreator constructor(
+	@JsonProperty("productId") var productId: String,
+	@JsonProperty("review") var review: String
 )

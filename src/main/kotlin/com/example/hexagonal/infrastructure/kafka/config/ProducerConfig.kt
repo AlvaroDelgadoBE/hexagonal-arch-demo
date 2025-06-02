@@ -1,6 +1,6 @@
-package com.example.hexagonal.kafka.config
+package com.example.hexagonal.infrastructure.kafka.config
 
-import com.example.hexagonal.domain.model.Review
+import com.example.hexagonal.infrastructure.rest.dto.ReviewDto
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -13,9 +13,9 @@ import org.springframework.kafka.core.ProducerFactory
 class ProducerConfig(
 	@Value("\${spring.kafka.bootstrapServers}")
 	private val bootstrapServers: String,
-	@Value("\${spring.kafka.productProducer.key-serializer}")
+	@Value("\${spring.kafka.reviewTopicProducer.key-serializer}")
 	private val keySerializerClass: String,
-	@Value("\${spring.kafka.productProducer.value-serializer}")
+	@Value("\${spring.kafka.reviewTopicProducer.value-serializer}")
 	private val valueSerializerClass: String
 ) {
 	
@@ -28,12 +28,12 @@ class ProducerConfig(
 	}
 	
 	@Bean
-	fun producerFactory(): ProducerFactory<String, Review> {
+	fun producerFactory(): ProducerFactory<String, ReviewDto> {
 		return DefaultKafkaProducerFactory(producerConfig())
 	}
 	
 	@Bean
-	fun producer(producerFactory: ProducerFactory<String, Review>): KafkaTemplate<String, Review> {
+	fun kafkaTemplate(producerFactory: ProducerFactory<String, ReviewDto>): KafkaTemplate<String, ReviewDto> {
 		return KafkaTemplate(producerFactory)
 	}
 	

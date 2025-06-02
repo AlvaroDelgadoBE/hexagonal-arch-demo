@@ -1,6 +1,8 @@
 package com.example.hexagonal.domain.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class Review(
-	var productId: String,
-	var review: String
+	@JsonProperty("productId") var productId: String,
+	@JsonProperty("review") var review: String
 )
