@@ -12,19 +12,19 @@ import org.springframework.stereotype.Component
 @Component
 class ProductInteractor(
 	private val productRepository: ProductRepositoryPort,
-	private val kafkaTemplate: KafkaTemplate<String, String>
+	private val kafkaTemplate: KafkaTemplate<String, Review>
 ) : IProductInteractor {
 	
 	override fun findProductById(productId: String): Product? {
 		return productRepository.findProductByProductId(productId);
 	}
 	
-	override fun createReview(reviewDto: ReviewDto): Review? {
+	override fun sendReviewCreation(reviewDto: ReviewDto): Review? {
 		try {
 			val review = ReviewMapper.fromReviewDtoToReview(reviewDto)
 			kafkaTemplate.send(
 				KafkaConfig.PRODUCT_TOPIC,
-				"${review.productId}, ${review.review}"
+				review
 			)
 			return review
 		} catch (_: Exception) {

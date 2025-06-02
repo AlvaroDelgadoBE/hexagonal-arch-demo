@@ -8,6 +8,6 @@ interface IProductInteractor {
 	
 	fun findProductById(productId: String): Product?
 	
-	fun createReview(reviewDto: ReviewDto): Review?
+	fun sendReviewCreation(reviewDto: ReviewDto): Review?
 	
 }

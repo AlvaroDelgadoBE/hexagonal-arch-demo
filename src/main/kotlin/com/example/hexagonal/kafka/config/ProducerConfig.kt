@@ -1,5 +1,6 @@
 package com.example.hexagonal.kafka.config
 
+import com.example.hexagonal.domain.model.Review
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -27,12 +28,12 @@ class ProducerConfig(
 	}
 	
 	@Bean
-	fun producerFactory(): ProducerFactory<String, String> {
+	fun producerFactory(): ProducerFactory<String, Review> {
 		return DefaultKafkaProducerFactory(producerConfig())
 	}
 	
 	@Bean
-	fun producer(producerFactory: ProducerFactory<String, String>): KafkaTemplate<String, String> {
+	fun producer(producerFactory: ProducerFactory<String, Review>): KafkaTemplate<String, Review> {
 		return KafkaTemplate(producerFactory)
 	}
 	

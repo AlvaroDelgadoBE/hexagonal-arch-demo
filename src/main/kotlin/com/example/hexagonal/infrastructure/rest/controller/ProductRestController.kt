@@ -19,8 +19,8 @@ class ProductRestController(private val productInteractor: IProductInteractor) {
 	}
 	
 	@PostMapping("/review")
-	fun createReview(@RequestBody reviewDto: ReviewDto): ReviewDto? {
-		return productInteractor.createReview(reviewDto)?.let { review ->
+	fun sendReviewCreation(@RequestBody reviewDto: ReviewDto): ReviewDto? {
+		return productInteractor.sendReviewCreation(reviewDto)?.let { review ->
 			ReviewDtoMapper.fromReviewToDto(review)
 		}
 	}
