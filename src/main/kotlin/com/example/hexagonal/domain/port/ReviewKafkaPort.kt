@@ -2,8 +2,8 @@ package com.example.hexagonal.domain.port
 
 import com.example.hexagonal.domain.model.Review
 
-interface ReviewRepositoryPort {
+interface ReviewKafkaPort {
 	
-	fun createReview(review: Review)
+	fun sendReviewCreation(review: Review): Review?
 	
 }

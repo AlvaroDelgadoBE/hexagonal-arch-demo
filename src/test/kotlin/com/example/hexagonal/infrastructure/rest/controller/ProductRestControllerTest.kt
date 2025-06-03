@@ -2,6 +2,8 @@ package com.example.hexagonal.infrastructure.rest.controller
 
 import com.example.hexagonal.infrastructure.database.h2.entity.ProductEntity
 import com.example.hexagonal.infrastructure.database.h2.mapper.ProductEntityMapper
+import com.example.hexagonal.infrastructure.rest.dto.ReviewDto
+import com.example.hexagonal.infrastructure.rest.mapper.ReviewDtoMapper
 import com.example.hexagonal.usecase.IProductInteractor
 import com.example.hexagonal.usecase.IReviewInteractor
 import org.mockito.Mockito.*
@@ -43,6 +45,21 @@ class ProductRestControllerTest {
 		assertEquals(productEntity.description, productDto.description)
 		assertEquals(productEntity.price, productDto.price)
 		assertEquals(productEntity.currency, productDto.currency)
+	}
+	
+	@Test
+	fun sendReviewCreationShouldReturnReviewIfNothingFails() {
+		val reviewDto = ReviewDto("productId", "review")
+		val reviewReturned = ReviewDtoMapper.fromDtoToReview(reviewDto)
+		
+		`when`(reviewInteractor.sendReviewCreation(reviewDto)).thenReturn(reviewReturned)
+		
+		val response = productRestController.sendReviewCreation(reviewDto)
+		
+		verify(reviewInteractor, times(1)).sendReviewCreation(reviewDto)
+		assertNotNull(response)
+		assertEquals(reviewDto.productId, response.productId)
+		assertEquals(reviewDto.review, response.review)
 	}
 	
 }

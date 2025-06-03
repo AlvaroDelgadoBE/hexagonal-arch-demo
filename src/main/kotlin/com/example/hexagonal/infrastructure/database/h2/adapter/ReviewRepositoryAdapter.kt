@@ -7,9 +7,11 @@ import com.example.hexagonal.infrastructure.database.h2.repository.ReviewJPARepo
 import org.springframework.stereotype.Component
 
 @Component
-class ReviewRepositoryAdapter(private val reviewJpaRepository: ReviewJPARepository) : ReviewRepositoryPort {
+class ReviewRepositoryAdapter(
+	private val reviewJpaRepository: ReviewJPARepository
+) : ReviewRepositoryPort {
 	
-	override fun saveReview(review: Review) {
+	override fun createReview(review: Review) {
 		reviewJpaRepository.save(ReviewEntityMapper.fromReviewToEntity(review))
 	}
 	
